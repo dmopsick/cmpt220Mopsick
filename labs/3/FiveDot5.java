@@ -4,13 +4,30 @@ package lab3;
 //CMPT 220L_112
 public class FiveDot5 {
 
+	public static final double CONVERSION_RATIO = 2.2;
+	
 	public static void main(String[] args) {
-		System.out.println("Kilograms Pounds\t|\tPounds\tKilograms");
-		System.out.println("1\t2.2\t\t|\t20\t9.09");
-		System.out.println("3\t6.6\t\t|\t25\t11.36");
-		System.out.println("...");
-		System.out.println("197\t433.4\t\t|\t510\t231.82");
-		System.out.println("199\t437.8\t\t|\t515\t234.09");
+		// Initialize variables
+		double kilogram = 1;
+		double pound = 20;
+		
+		// Print the table heading
+		System.out.println("Kilograms   Pounds    |    Pounds    Kilograms");
+		// For loop to print the table
+		for(int x = 0; x < 100; x ++){
+			if(kilogram < 10){
+				System.out.printf((int)kilogram + "%17.1f    |    " + (int)pound + "%16.2f", kilogram * CONVERSION_RATIO, pound / CONVERSION_RATIO);
+			}
+			else if(kilogram < 100){
+				System.out.printf((int)kilogram + "%16.1f    |    " + (int)pound + "%16.2f", kilogram * CONVERSION_RATIO, pound / CONVERSION_RATIO);
+			}
+			else{
+				System.out.printf((int)kilogram + "%15.1f    |    " + (int)pound + "%16.2f", kilogram * CONVERSION_RATIO, pound / CONVERSION_RATIO);
+			}
+			System.out.println();
+			kilogram += 2;
+			pound += 5;
+		}
 	}
 
 }
