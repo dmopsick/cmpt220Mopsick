@@ -1,5 +1,3 @@
-package lab3;
-
 //By Dan Mopsick
 //CMPT 220L_112
 public class FiveDot5 {
