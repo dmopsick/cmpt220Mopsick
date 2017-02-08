@@ -1,5 +1,3 @@
-package lab3;
-
 //By Dan Mopsick
 //CMPT 220_112
 public class SixDot1 {
