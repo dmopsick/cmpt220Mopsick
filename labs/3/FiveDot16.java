@@ -1,3 +1,5 @@
+package lab3;
+
 import java.util.Scanner;
 
 // By Dan Mopsick
@@ -12,7 +14,8 @@ public class FiveDot16 {
 		System.out.println("Enter an integer.");
 		
 		// Parse input from the user
-		int num = scanner.nextInt();
+		int input = scanner.nextInt();
+		int num = input;
 		
 		// Create string to hold list of factors
 		String factors = "";
@@ -30,7 +33,7 @@ public class FiveDot16 {
 		}
 		
 		// Display the results to the user
-		System.out.println(factors);
+		System.out.println("Smallest factors of " + input + ": " + factors);
 	}
 
 }
