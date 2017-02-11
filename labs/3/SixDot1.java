@@ -4,7 +4,7 @@ public class SixDot1 {
 
 	public static void main(String[] args) {
 		int num;
-		for(int n = 1; n < 100; n++){
+		for(int n = 1; n < 100; n++){ // JA: You missed the last number. It should be <= 100
 			num = getPentagonalNumber(n);
 			System.out.print(num + " ");
 			if(n % 10 == 0){
