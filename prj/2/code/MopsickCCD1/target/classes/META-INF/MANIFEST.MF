@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: MopsickCCD1
+Implementation-Version: 0.1.0-SNAPSHOT
+Built-By: Dan
+Implementation-Vendor-Id: MopsickCCD1
+Build-Jdk: 1.8.0_112
+Implementation-URL: http://projects.spring.io/spring-boot/MopsickCCD1/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
