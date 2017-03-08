@@ -63,8 +63,11 @@ public class PatientController {
 		List<Patient> returnedPatientList = this.patientService.readAll();
 		
 		// logger.info("Flag" + returnedPatientList.get(0).getName());
-		
-		if(returnedPatientList.size() == 0){
+		if(returnedPatientList == null){
+			responseStatus = HttpStatus.NOT_FOUND;
+			logger.info("FLAG - NOT FOUND");
+		}
+		else if(returnedPatientList.size() == 0){
 			responseStatus = HttpStatus.NOT_FOUND;
 			logger.info("FLAG - NOT FOUND");
 		}
