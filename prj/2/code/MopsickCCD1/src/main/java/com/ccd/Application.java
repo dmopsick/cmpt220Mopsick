@@ -15,7 +15,8 @@ import com.ccd.controllers.PatientController;
 //@ComponentScan(basePackageClasses = PatientController.class)
 public class Application {
 
-    @Bean
+
+	@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurerAdapter() {
             @Override

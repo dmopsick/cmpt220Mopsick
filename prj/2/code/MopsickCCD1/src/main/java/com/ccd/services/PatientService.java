@@ -20,7 +20,7 @@ public class PatientService {
 		@Autowired
 		public PatientService(PatientRepository patientRepository){
 			this.patientRepository = patientRepository;
-			addSamplePatientList("PatientList1.xml");
+			// addSamplePatientList("PatientList1.xml");
 		}
 		
 		@InitBinder
@@ -40,7 +40,8 @@ public class PatientService {
 		
 		/** Adds a patient into the repository */
 		public Patient add(Patient bodyPatient){
-			Patient savedPatient = this.patientRepository.save(bodyPatient);
+			Patient savedPatient = patientRepository.save(bodyPatient);
+			logger.info("Flag - saved patient's name " + savedPatient.getName());
 			return savedPatient;
 		}
 		
