@@ -5,6 +5,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -13,7 +14,7 @@ import org.xml.sax.SAXException;
 
 import com.ccd.models.Patient;
 
-
+@Component
 public class XMLDOMParser {
 	public XMLDOMParser(){}
 	
@@ -82,9 +83,11 @@ public class XMLDOMParser {
 		Long id = Long.parseLong(idString);
 		//System.out.println("Flag " + id);
 		
-		// Parse the name of the patient
-		String name = patient.getElementsByTagName("name").item(0).getTextContent();
-		// System.out.println("Flag: " + name);
+		// Parse the given name of the patient
+		String givenName = patient.getElementsByTagName("givenName").item(0).getTextContent();
+		
+		// Parse the family name of the patient
+		String familyName = patient.getElementsByTagName("familyName").item(0).getTextContent();
 		
 		// Parse the diagnosis code of the patient 
 		String diagnosis = patient.getElementsByTagName("diagnosis").item(0).getTextContent();
@@ -103,7 +106,7 @@ public class XMLDOMParser {
 		String insuranceId = patient.getElementsByTagName("insuranceId").item(0).getTextContent();
 		
 		// Create a patient model
-		Patient patientModel = new Patient(id, name, diagnosis, phoneNumber, insuranceProvider, insuranceId);
+		Patient patientModel = new Patient(id, givenName, familyName, diagnosis, phoneNumber, insuranceProvider, insuranceId);
 		
 		return patientModel;
 	}

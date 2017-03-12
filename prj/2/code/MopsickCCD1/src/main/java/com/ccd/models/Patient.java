@@ -5,12 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Patient {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	private String name;
+	private String givenName;
+	private String familyName;
 	private String diagnosis;
 	private String phoneNumber;
 	private String insuranceProvider;
@@ -18,9 +21,10 @@ public class Patient {
 	
 	private Patient(){};
 	
-	public Patient(long id, String name, String diagnosis, String phoneNumber, String insuranceProvider, String insuranceId){
+	public Patient(long id, String givenName, String familyName, String diagnosis, String phoneNumber, String insuranceProvider, String insuranceId){
 		this.id = id;
-		this.name = name;
+		this.givenName = givenName;
+		this.familyName = familyName;
 		this.diagnosis = diagnosis;
 		this.phoneNumber = phoneNumber;
 		this.insuranceProvider = insuranceProvider;
@@ -32,9 +36,20 @@ public class Patient {
 		return id;
 	}
 	
-	public String getName(){
-		return name;
+	public String getGivenName(){
+		return givenName;
 	}
+	
+	public String getFamilyName(){
+        return familyName;
+    }
+	
+	// Using @JsonIgnore to prevent the full name field from being sent in the JSON Object
+	@JsonIgnore
+	/** Combines the given and family name to retrun the full name */
+	public String getFullName(){
+        return givenName + " " + familyName;
+    }
 	
 	public String getPhoneNumber(){
 		return phoneNumber;
@@ -52,22 +67,32 @@ public class Patient {
 		return insuranceId;
 	}
 	
-	public void setName(String name){
-		this.name = name;
+	/** Setter method for the given name variable */
+	public void setGivenName(String givenName){
+		this.givenName = givenName;
 	}
 	
+	/** Setter method for the family name variable */
+	public void setLastName(String familyName){
+	    this.familyName = familyName;
+	}
+	
+	/** Setter method for the phone number variable */
 	public void setPhoneNumber(String phoneNumber){
 		this.phoneNumber = phoneNumber;
 	}
 	
+	/** Setter method for the diagnosis variable */
 	public void setDiagnosis(String diagnosis){
 		this.diagnosis = diagnosis;
 	}
 	
+	/** Setter method for the insurance provider variable */
 	public void setInsuranceProvider(String insuranceProvider){
 		this.insuranceProvider = insuranceProvider;
 	}
 	
+	/** Setter method for the insurance id variable */
 	public void setInsuranceId(String insuranceId){
 		this.insuranceId = insuranceId;
 	}

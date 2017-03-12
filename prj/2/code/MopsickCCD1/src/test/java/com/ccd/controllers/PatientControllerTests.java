@@ -42,13 +42,15 @@ public class PatientControllerTests {
     @Mock
     private PatientService patientService;
     
-    @InjectMocks
+    // @InjectMocks
     private PatientController patientController;
     
     @Before
     public void setup() throws Exception {
-        MockitoAnnotations.initMocks(this);
+        // MockitoAnnotations.initMocks(this);
 
+        this.patientController = new PatientController(patientService);
+        
         this.mockMvc = MockMvcBuilders.standaloneSetup(patientController).build();
         this.jsonMapper  = new ObjectMapper();
     }
@@ -66,7 +68,7 @@ public class PatientControllerTests {
     
     @Test
     public void getReturnsIntendedPatient() throws Exception {
-    	Patient samplePatient = new Patient(1L, "SampleName", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
+        Patient samplePatient = new Patient(1L, "Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
     	
     	Mockito.when(this.patientService.read(1L)).thenReturn(samplePatient);
         
@@ -75,7 +77,8 @@ public class PatientControllerTests {
         mockMvc.perform(getPatient)
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.name", is("SampleName")))
+                .andExpect(jsonPath("$.givenName", is("Joe")))
+                .andExpect(jsonPath("$.familyName", is("Dirt")))
                 .andExpect(jsonPath("$.diagnosis", is("ABC123DEF")))
                 .andExpect(jsonPath("$.phoneNumber", is("5555555555")))
                 .andExpect(jsonPath("$.insuranceProvider", is("Provider")))
@@ -107,9 +110,9 @@ public class PatientControllerTests {
     @Test
     public void getAllReturnsIntendedPatientList() throws Exception{
     	// Create sample patients to populate a sample patient list to ensure proper input is being returned
-    	Patient samplePatient1 = new Patient(1L, "Bob", "ABC123DEF", "5555555555", "UnitedHealthcare", "DEF123ABC");
-    	Patient samplePatient2 = new Patient(1L, "Janice", "QWE456RTY", "1234567890", "Aetna", "YUP845POK");
-    	Patient samplePatient3 = new Patient(1L, "Franklin", "UIO789PAS", "9876543210", "Humana", "JOK852SNK");
+        Patient samplePatient1 = new Patient(1L, "Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
+        Patient samplePatient2 = new Patient(2L, "Bobby", "Johnson", "963JKL852", "7777777777", "Aetna", "WER456YTG");
+    	Patient samplePatient3 = new Patient(3L, "Franklin", "Bango", "UIO789PAS", "9876543210", "Humana", "JOK852SNK");
     	List<Patient> samplePatientList = new ArrayList<Patient>();
     	samplePatientList.add(samplePatient1);
     	samplePatientList.add(samplePatient2);
@@ -121,9 +124,12 @@ public class PatientControllerTests {
     	
     	mockMvc.perform(getPatient)
     			.andExpect(status().isOk())
-    			.andExpect(jsonPath("$[0].name", is("Bob")))
-    			.andExpect(jsonPath("$[1].name", is("Janice")))
-    			.andExpect(jsonPath("$[2].name", is("Franklin")));
+    			.andExpect(jsonPath("$[0].givenName", is("Joe")))
+    			.andExpect(jsonPath("$[0].familyName", is("Dirt")))
+    			.andExpect(jsonPath("$[1].givenName", is("Bobby")))
+    			.andExpect(jsonPath("$[1].familyName", is("Johnson")))
+    			.andExpect(jsonPath("$[2].givenName", is("Franklin")))
+    			.andExpect(jsonPath("$[2].familyName", is("Bango")));
     }
     
 }
