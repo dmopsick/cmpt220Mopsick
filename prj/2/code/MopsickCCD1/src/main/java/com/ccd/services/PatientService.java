@@ -18,6 +18,7 @@ public class PatientService {
     private final PatientRepository patientRepository;
     private final ParserService parserService;
     
+    /** This is the constructor to be used by the application */
     @Autowired
     public PatientService(PatientRepository patientRepository, ParserService parserService) {
         this.patientRepository = patientRepository;
@@ -25,6 +26,8 @@ public class PatientService {
         addPatientFromFile("PatientList1.xml");
     }
     
+    /** This constructor is for testing services to avoid calling addPatientFromFile
+     * I do not want to add items in the database when testing the application */
     public PatientService(PatientRepository patientRepository, ParserService parserService, Boolean live) {
         this.patientRepository = patientRepository;
         this.parserService = parserService;
@@ -37,12 +40,10 @@ public class PatientService {
      * passed into the method via filename*/
     public void addPatientFromFile(String fileName) {
         // Save the returned list of patients parsed from XML
-        Patient[] sampleList = this.parserService.parsePatientFromFile(fileName);
+        Patient[] patientArray = this.parserService.parsePatientFromFile(fileName);
 
-        // Save the parsed patients to the repository
-        for (int i = 0; i < sampleList.length; i++) {
-            add(sampleList[i]);
-        }
+        // Add the parsed patients into the array
+        addMultiple(patientArray);
     }
 
     /** Adds a patient into the repository */
@@ -50,6 +51,19 @@ public class PatientService {
         Patient savedPatient = patientRepository.save(bodyPatient);
         //logger.info("Flag - saved patient's name " + savedPatient.getFullName());
         return savedPatient;
+    }
+    
+    /** Save multiple patients at once */
+    public Patient[] addMultiple(Patient[] patientArray){
+        // Create an array to hold saved patients
+        Patient[] savedArray = new Patient[patientArray.length];
+        
+        // Save patients
+        for (int i = 0; i < patientArray.length; i++) {
+            savedArray[i] = add(patientArray[i]);
+        }
+        
+        return savedArray;
     }
 
     /** Returns a specific patient */
@@ -59,7 +73,7 @@ public class PatientService {
 
     /** Returns all of the patients in the repository */
     public List<Patient> readAll() {
-        logger.info("FLAG - readAll() was called");
+        // logger.info("FLAG - readAll() was called");
         return this.patientRepository.findAll();
     }
 }
