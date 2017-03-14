@@ -68,7 +68,7 @@ public class PatientControllerTests {
     
     @Test
     public void getReturnsIntendedPatient() throws Exception {
-        Patient samplePatient = new Patient(1L, "Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
+        Patient samplePatient = new Patient("Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
     	
     	Mockito.when(this.patientService.read(1L)).thenReturn(samplePatient);
         
@@ -110,9 +110,9 @@ public class PatientControllerTests {
     @Test
     public void getAllReturnsIntendedPatientList() throws Exception{
     	// Create sample patients to populate a sample patient list to ensure proper input is being returned
-        Patient samplePatient1 = new Patient(1L, "Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
-        Patient samplePatient2 = new Patient(2L, "Bobby", "Johnson", "963JKL852", "7777777777", "Aetna", "WER456YTG");
-    	Patient samplePatient3 = new Patient(3L, "Franklin", "Bango", "UIO789PAS", "9876543210", "Humana", "JOK852SNK");
+        Patient samplePatient1 = new Patient("Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
+        Patient samplePatient2 = new Patient("Bobby", "Johnson", "963JKL852", "7777777777", "Aetna", "WER456YTG");
+    	Patient samplePatient3 = new Patient("Franklin", "Bango", "UIO789PAS", "9876543210", "Humana", "JOK852SNK");
     	List<Patient> samplePatientList = new ArrayList<Patient>();
     	samplePatientList.add(samplePatient1);
     	samplePatientList.add(samplePatient2);
