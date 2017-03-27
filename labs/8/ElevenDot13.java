@@ -1,5 +1,3 @@
-package lab8;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -46,11 +44,14 @@ public class ElevenDot13 {
 	}
 	
 	public static void removeDuplicate(ArrayList<Integer> list){
-		for(int i = 0; i < list.size(); i ++){
-			for(int j = i + 1; j < list.size(); j++){
-				if(list.get(i) == list.get(j)){
-					list.remove(j);
-				}
+		int testIndex = 0;
+		while(testIndex < list.size()){
+			int lastIndex = list.lastIndexOf(list.get(testIndex));
+			if(lastIndex != testIndex){
+				list.remove(lastIndex);
+			}
+			else{
+				testIndex ++;
 			}
 		}
 	}

@@ -1,5 +1,3 @@
-package lab8;
-
 import java.util.Date;
 
 abstract class GeometricObject {

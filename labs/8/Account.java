@@ -1,5 +1,3 @@
-package lab8;
-
 import java.util.Date;
 
 public class Account {
