@@ -54,8 +54,7 @@ public class PatientController {
 	
 	/** Handles the request for displaying all of the patients in the repository */
 	@RequestMapping(method = RequestMethod.GET)
-	ResponseEntity<List<Patient>> readAllPatient(){
-		logger.info("FLAG patient/1 called");
+	ResponseEntity<List<Patient>> readAllPatients(){
 		// Initializes the HTTP status to be returned
 		HttpStatus responseStatus;
 		

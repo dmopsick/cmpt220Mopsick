@@ -72,7 +72,7 @@ public class Patient {
 	}
 	
 	/** Setter method for the family name variable */
-	public void setLastName(String familyName){
+	public void setFamilyName(String familyName){
 	    this.familyName = familyName;
 	}
 	

@@ -96,7 +96,7 @@ public class PatientControllerTests {
     }
     
     @Test
-    public void getAllCallsPatientServiceReadAll() throws Exception{
+    public void readAllPatientsCallsPatientServiceReadAll() throws Exception{
     	Mockito.when(this.patientService.readAll()).thenReturn(null);
     	
     	MockHttpServletRequestBuilder getPatient = get("/patient/");
@@ -108,7 +108,7 @@ public class PatientControllerTests {
     }
     
     @Test
-    public void getAllReturnsIntendedPatientList() throws Exception{
+    public void readAllPatientsReturnsIntendedPatientList() throws Exception{
     	// Create sample patients to populate a sample patient list to ensure proper input is being returned
         Patient samplePatient1 = new Patient("Joe", "Dirt", "ABC123DEF", "5555555555", "Provider", "DEF123ABC");
         Patient samplePatient2 = new Patient("Bobby", "Johnson", "963JKL852", "7777777777", "Aetna", "WER456YTG");
