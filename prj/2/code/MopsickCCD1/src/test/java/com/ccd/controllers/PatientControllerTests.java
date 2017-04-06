@@ -56,6 +56,26 @@ public class PatientControllerTests {
     }
     
     @Test
+    public void addPatientFileCallsPatientServiceAddPatientFromFile() throws Exception{
+    	Mockito.when(this.patientService.addPatientFromFile("test.xml")).thenReturn(new Patient[1]);
+    	
+    	MockHttpServletRequestBuilder postPatient  = post("/patient/test");
+    	
+    	mockMvc.perform(postPatient)
+    			.andExpect(status().isCreated());
+    	
+    	Mockito.verify(this.patientService, Mockito.times(1)).addPatientFromFile("test.xml");
+    }
+    
+    @Test
+    public void addPatientFileHandlesBadFileName() throws Exception{
+    	MockHttpServletRequestBuilder postPatient  = post("/patient/test");
+    	
+    	mockMvc.perform(postPatient)
+    			.andExpect(status().isNotFound());
+    }
+    
+    @Test
     public void getCallsPatientServiceRead() throws Exception {
     	Mockito.when(this.patientService.read(1L)).thenReturn(null);
         
@@ -76,7 +96,6 @@ public class PatientControllerTests {
         
         mockMvc.perform(getPatient)
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.givenName", is("Joe")))
                 .andExpect(jsonPath("$.familyName", is("Dirt")))
                 .andExpect(jsonPath("$.diagnosis", is("ABC123DEF")))

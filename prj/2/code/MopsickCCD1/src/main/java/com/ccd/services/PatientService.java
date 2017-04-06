@@ -37,13 +37,13 @@ public class PatientService {
     protected void initBinder(WebDataBinder binder) {}
 
     /** Adds a list of patients into the repository from a XML file 
-     * passed into the method via filename*/
-    public void addPatientFromFile(String fileName) {
+     * passed into the method via filename */
+    public Patient[] addPatientFromFile(String fileName) {
         // Save the returned list of patients parsed from XML
         Patient[] patientArray = this.parserService.parsePatientFromFile(fileName);
 
         // Add the parsed patients into the array
-        addMultiple(patientArray);
+        return addMultiple(patientArray);
     }
 
     /** Adds a patient into the repository */
