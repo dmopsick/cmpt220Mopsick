@@ -44,7 +44,6 @@ public class PatientController {
 		// Initialize the array that will be returned holding generated patients
 		Patient[] addedPatients;
 		
-	
 		// Add the patients from the passed file into the database 
 		addedPatients = this.patientService.addPatientFromFile(fileWithExtension);
 		if(addedPatients == null){
@@ -53,7 +52,6 @@ public class PatientController {
 		else{
 			responseStatus = HttpStatus.CREATED;
 		}
-		
 		return new ResponseEntity<Patient[]>(addedPatients, responseStatus);
 	}
 	
