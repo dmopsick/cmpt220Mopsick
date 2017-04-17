@@ -1,4 +1,3 @@
-
 public class MyString2 {
     private String s;
     
@@ -53,8 +52,24 @@ public class MyString2 {
     
     /** Not sure how to manually convert to upper case */
     public MyString2 toUpperCase(){
-        String upperCaseS = s.toUpperCase();
-        return new MyString2(upperCaseS);
+        // Turn myString2 into characters
+        char[] charArray = s.toCharArray();
+        
+        // Initialize uppercase string
+        String upperCase = "";
+        
+        // Make all characters within the array uppercase and add it to the new string
+        for(int i = 0; i < charArray.length; i ++){
+        	if(Character.isLowerCase(charArray[i])){
+        		charArray[i] = Character.toUpperCase(charArray[i]);
+        	}
+        	upperCase += charArray[i];
+        }
+        
+        // Create a new MyString2 object to return
+        MyString2 returnMyString2 = new MyString2(upperCase);
+        
+        return returnMyString2;
     }
     
     /** Converts the string to a an array */
@@ -72,7 +87,7 @@ public class MyString2 {
     
     /** Returns the string representation of the boolean argument */
     public static MyString2 valueOf(boolean b){
-        String argument = "" + b;
+        String argument = "" + Boolean.toString(b);
         return new MyString2(argument);
     }
 }
