@@ -1,4 +1,3 @@
-
 public class Square extends GeometricObject implements Colorable {
     private double width;
         
